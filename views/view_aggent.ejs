@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>view_agent</title>
+        <link rel="stylesheet" href="/stylesheets/office.css">
+        <style>
+            tr{
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+       
+
+            <div class="header ">
+                    <span style=" font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;">View <%= tit %>s</span>
+                    <a class="head_a" href="/home/dashboardOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Home</a>
+                    <p class="head_a" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Welcome: <%=user.username%></p>
+                    <a class="head_a" href="/home/logoutOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 50px; margin-top:10px; float: right; text-decoration: none; color: white;">Logout</a></div>
+            
+           
+            
+              
+                    
+                    <%if(flag === 1 ){   %>
+            
+            <div class="main"  style="margin : 50px auto 0 auto; width: 80%; height: auto; text-align: center; height: 500px; overflow-y: scroll; ">
+                    <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %> List</b></em></div>
+                    <br><br> 
+                    <table style="width:80%; height: 200px; overflow-y: scroll; margin :auto ;   border-spacing:0 15px;  border-collapse: separate;background-color: lightgrey;border-radius: 10px; box-shadow: 1px 1px 10px 1px; ">
+                            
+
+                    
+                        <%
+                        if(userData.length!=0){
+                        var i=1;
+                        userData.forEach(function(data){
+                        %>
+                    <tr>
+                        <td><%=data.ID %></td>
+                        <td><%=data.Firstname+" "+data.Lastname %></td>
+                        <% if(tit === "Agent") { %>
+                        <td><a href="/office/report/<%=data.ID%>">Report</a></td>
+                        <td><a href="/office/profile/a<%=data.ID%>">Profile</a></td>
+                        <% } %>
+                        <% if(tit === "Buyer") { %>
+                            <td><a href="/office/profile/b<%=data.ID%>">Profile</a></td>
+                        <% } %>
+                        <% if(tit === "Seller") { %>
+                            <td><a href="/office/profile/s<%=data.ID%>">Profile</a></td>
+                        <% } %>
+                    </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="4">No Data Found</td>
+                    </tr>
+                    <% } %>
+
+                </table>
+                <br><br>
+            </div>
+
+            <% } %>
+
+            <%if(flag === 2 ){   %>
+
+             <div class="main"  style="margin : 50px auto 0 auto; width: 100%; height: auto; text-align: center; height: 500px; overflow-y: scroll; ">
+                    <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %> List</b></em></div>
+                    <br><br> 
+                    <table style="width:90%; height: 200px; overflow-y: scroll; margin :auto ;   border-spacing:0 15px;  border-collapse: separate;background-color: lightgrey;border-radius: 10px; box-shadow: 1px 1px 10px 1px; ">
+                    
+                    <tr>
+                            <th>P_ID</th>
+                            <th>L_date</th>
+                            <th>Address</th>
+                            <th>Prop. price</th>
+                            <th>Prop size </th>
+                            <th>BHK</th>
+                            <th>Tag</th>
+                            <th>Type</th>
+                    </tr>
+                    <%
+                        if(userData.length!=0){
+                        var i=1;
+                        userData.forEach(function(data){
+                    %>
+                        <tr>
+                            <td><%=data.ID %></td>
+                            <td><% var a =  data.L_date.toDateString().substring(4,16);%>
+                               <%= a%>   
+                            </td>
+                            <td><%=data.adress %></td>
+                            <td><%=data.P_sug_price %></td>
+                            <td><%=data.P_size %></td>
+                            <td><%=data.bhk %></td>
+                            <td><%if(data.P_tag===1){%> Rent <%} else {%> Sale <% } %></td>
+                            <td><%if(data.P_type===1){%> Apartm. <%} else {%> House <% } %></td>
+                        </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="8">No Data Found</td>
+                    </tr>
+                    <% } %>
+                    
+
+                </table>
+                <br><br>
+            </div>
+
+            <% } %>
+
+            
+    </body>
+</html>

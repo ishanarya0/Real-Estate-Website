@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>add agent</title>
+        <link rel="stylesheet" href="/stylesheets/office.css">
+    </head>
+    <body>
+       
+
+            <div class="header ">
+                    <span style=" font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;">Office</span>
+                    <a class="head_a" href="/home/dashboardOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Home</a>
+                    <p class="head_a" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Welcome: <%=user.username%></p>
+                    <a class="head_a" href="/home/logoutOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 50px; margin-top:10px; float: right; text-decoration: none; color: white;">Logout</a>
+            </div>
+            
+            </div>
+
+            <div class="main"  style="margin : 100px auto 0 auto; width: 50%; height: 400px; text-align: center; border-radius: 10px;     box-shadow: 1px 1px 10px 1px; ">
+               <br> <span style=" padding : 10px; margin-top : 30px; font-size: 23px;text-align: center; color: white; background-color: #0275d8; border-radius: 10px;">ADD <%= tit.toUpperCase() %></span>
+                
+                <form style="margin-top : 40px;" action="/office/add/<%= tit %>" method="POST">
+                    
+                    <div class="form-group" style="width:60%; margin: auto;">
+                        <input type="text" class="add_agent" id="first_name" name="first_name" placeholder="First Name" style="width: 49%; float: left; border-radius: 4px;" required>
+                    
+                        <input type="text" class="add_agent" id="last_name" name="last_name" placeholder="Last Name" style="width: 49%; border-radius: 4px;">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="email" class="add_agent" id="email" name="email" placeholder="Enter email" style="width: 60%; border-radius: 4px;" required>
+                     </div>
+                    
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="text" class="add_agent" id="Contact" name="Contact" placeholder="contact" style="width: 60%; border-radius: 4px;" required maxlength="10" minlength="10"> 
+                    </div>
+
+                    
+
+                    <div class="form-group" style="margin: 20px auto 0px auto; width : 60%; height: 50px;" >
+                    <input type="submit" style="float :left; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 0px auto 0px auto;">
+                    <div style="float :right; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 3px auto 0px auto; cursor: pointer;"onClick="javascript:document.location.href='/office'">CANCEL</div>  
+                    </div>
+                   
+                    <p style="color: red; font-size: 15px; margin-top: 10px;"><%= error%></p>
+                  
+                </form>
+            </div>
+
+            
+    </body>
+</html>

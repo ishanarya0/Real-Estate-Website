@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Add <%= tit%></title>
+        <link rel="stylesheet" href="/stylesheets/office.css">
+    </head>
+    <body>
+       
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Agent</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/home/dashboard">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active"><p class="nav-link">Welcome : <%= user.Firstname %> <%= user.Lastname %></p></li>
+                <li class="nav-item active"><p class="nav-link">Email: <%= user.Email %></p></li>
+                <li class="nav-item active"><p class="nav-link">Contact: <%= user.contact %></p></li>
+                <li class="nav-item active"><a class="nav-link" href="/home/logout">Logout</a></li>
+                
+                    
+              </ul>
+            </div>
+          </nav>
+            
+            </div>
+
+            <div class="main"  style="margin : 100px auto 0 auto; width: 40%; height: 400px; text-align: center; border-radius: 10px;     box-shadow: 1px 1px 10px 1px; ">
+               <br> <span style=" padding : 10px; margin-top : 30px; font-size: 23px;text-align: center; color: white; background-color: #0275d8; border-radius: 10px;">ADD <%= tit.toUpperCase() %></span>
+                
+                <form style="margin-top : 40px;" action="/office/add/<%= tit %>" method="POST">
+                    
+                    <div class="form-group" style="width:60%; margin: auto;">
+                        <input type="text" class="add_agent" id="first_name" name="first_name" placeholder="First Name" style="width: 49%; float: left; border-radius: 4px;" required>
+                    
+                        <input type="text" class="add_agent" id="last_name" name="last_name" placeholder="Last Name" style="width: 49%; border-radius: 4px;">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="email" class="add_agent" id="email" name="email" placeholder="Enter email" style="width: 60%; border-radius: 4px;" required>
+                     </div>
+                    
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="text" class="add_agent" id="Contact" name="Contact" placeholder="contact" style="width: 60%; border-radius: 4px;" required maxlength="10" minlength="10"> 
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="text" class="add_agent" id="Address" name="Address" placeholder="Address" style="width: 60%; border-radius: 4px;" required>
+                    </div>
+
+                    <div class="form-group" style="margin: 20px auto 0px auto; width : 60%; height: 50px;" >
+                    <input type="submit" style="float :left; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 0px auto 0px auto;">
+                    <div style="float :right; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 3px auto 0px auto; cursor: pointer;"onClick="javascript:document.location.href='/agent'">CANCEL</div>  
+                    </div>
+                   
+                    <p style="color: red; font-size: 15px; margin-top: 10px;"><%= error%></p>
+                  
+                </form>
+            </div>
+
+            
+    </body>
+</html>

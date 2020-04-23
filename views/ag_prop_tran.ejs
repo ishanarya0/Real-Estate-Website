@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Transactions</title>
+        <link rel="stylesheet" href="/stylesheets/office.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <style>
+            tr{
+                background-color: white;
+            }
+            body{
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+       
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Agent</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/home/dashboard">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active"><p class="nav-link">Welcome : <%= user.Firstname %> <%= user.Lastname %></p></li>
+                  <li class="nav-item active"><p class="nav-link">Email: <%= user.Email %></p></li>
+                  <li class="nav-item active"><p class="nav-link">Contact: <%= user.contact %></p></li>
+                  <li class="nav-item active"><a class="nav-link" href="/home/logout">Logout</a></li>
+                  
+                      
+                </ul>
+              </div>
+          </nav>
+            
+           
+            
+            <div class="main"  style="margin : 50px auto 0 auto; width: 80%; height: auto; text-align: center; height: 500px; ">
+                <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %></b></div>
+                <br><br> 
+                
+                <table style="width:90%; height: 200px; overflow-y: scroll; margin :auto ;   border-spacing:0 15px;   box-shadow: 1px 1px 10px 1px; border-collapse: collapse;">
+                    <%
+                    if(flag === 1 ){ %>
+                        <tr style="background-color: #0275d8; color: white; height: 40px; opacity: 70%; "> 
+                            <th style="width: 134px;">Tran. ID</th>
+                            <th style="width: 134px;">Prop. ID</th>
+                            <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 400px; overflow:hidden">Address</th>
+                            <th style="width: 134px;">BHK</th>
+                            <th style="width: 154px;">Selling Price</th>
+                            <th style="width: 134px;">Sale Date</th>
+                       </tr>
+                    
+                    <%
+                    if(userData.length!=0){
+                    var i=1;
+                    userData.forEach(function(data){
+                    %>
+
+                    <tr>
+                        <tr>
+                            <td><%=data.TS_ID %></td>
+                            <td><%=data.p_id %></td>
+                            <td><%=data.a_id %></td>
+                            <td><%=data.adress %></td>
+                            <td><%=data.bhk %></td>
+                            <td><%=data.sell_price %></td>
+                            <td><% var a =  data.s_date.toDateString().substring(4,16);%>
+                                <%= a%></td>
+                           
+                        </tr>
+                    </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="7">No Data Found</td>
+                    </tr>
+                    <% } } %>
+                   
+                    <%
+                    if(flag === 2 ){   %>
+                        <tr style="background-color: #0275d8; color: white; height: 40px; opacity: 70%; "> 
+                            <th style="width: 134px;">Tran. ID</th>
+                            <th style="width: 134px;">Prop. ID</th>
+                            <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 400px; overflow:hidden">Address</th>
+                            <th style="width: 134px;">BHK</th>
+                            <th style="width: 154px;">Rent</th>
+                            <th style="width: 134px;">Sale Date</th>
+                            <th style="width: 134px;">End Date</th>
+                       </tr>
+                   
+                    <%
+                    if(userData.length!=0){
+                    var i=1;
+                    userData.forEach(function(data){
+                    %>
+
+                    <tr>
+                        <td><%=data.TR_ID %></td>
+                        <td><%=data.p_id %></td>
+                        <td><%=data.a_id %></td>
+                        <td><%=data.adress %></td>
+                        <td><%=data.bhk %></td>
+                        <td><%=data.rent %></td>
+                        <td><% var a =  data.st_date.toDateString().substring(4,16);%>
+                            <%= a%></td>
+                        <td><% var a =  data.end_date.toDateString().substring(4,16);%>
+                            <%= a%></td>
+                    </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="8">No Data Found</td>
+                    </tr>
+                    <% } } %>
+
+
+                </table>
+                <br><br>
+            </div>
+
+            
+    </body>
+</html>
