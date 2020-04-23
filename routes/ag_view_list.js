@@ -23,11 +23,12 @@ router.use(bp.urlencoded( {extended: true}));
  });
 
  router.get('/agent',function(req,res){
-  var user =  req.session.user;
-  if(user == null){
-    res.redirect("/login");
-    return;
- }
+      console.log(req.url);
+      var user =  req.session.user;
+      if(user == null){
+        res.redirect("/login");
+        return;
+     }
       con.query("select ID,Firstname,Lastname from agent",(err, agnt) => {
         var user = req.session.user;
         res.render("ag_view_list.ejs",{user : user, userData : agnt, tit : "Agent",flag : 1});
@@ -38,11 +39,12 @@ router.use(bp.urlencoded( {extended: true}));
   });
 
   router.get('/buyer',function(req,res){
+    console.log(req.url);
     var user =  req.session.user;
-  if(user == null){
-    res.redirect("/login");
-    return;
- }
+    if(user == null){
+      res.redirect("/login");
+      return;
+   }
     var sql = "select b.ID,b.Firstname,b.Lastname from buyer b, tran_sale ts where (ts.a_id = " + user.ID + " and b.ID = ts.b_id) union select b.ID,b.Firstname,b.Lastname from buyer b, tran_sale tr where (tr.a_id =" + user.ID +" and b.ID = tr.b_id)"
 
     
@@ -57,11 +59,13 @@ router.use(bp.urlencoded( {extended: true}));
 });
 
 router.get('/seller',function(req,res){
-  var user =  req.session.user;
-  if(user == null){
-    res.redirect("/login");
-    return;
- }
+    console.log(req.url);
+   
+    var user =  req.session.user;
+    if(user == null){
+      res.redirect("/login");
+      return;
+   }
     con.query("select o.ID,o.Firstname,o.Lastname from owner o,property p where o.ID=p.o_id and p.a_id = "+user.ID,(err, agnt) => {
       var user = req.session.user;
       res.render("ag_view_list.ejs",{user : user, userData : agnt, tit : "Seller", flag : 1});
@@ -71,6 +75,7 @@ router.get('/seller',function(req,res){
 });
 
 router.get('/property',function(req,res){
+  console.log(req.url);
   var user =  req.session.user;
   if(user == null){
     res.redirect("/login");
@@ -99,7 +104,7 @@ router.post('/property',function(req,res){
   var r = req.body.rent;
   var a = req.body.aprt;
   var h = req.body.house;
-  var user = req.session.user;
+  
   var str = "select * from property where P_status=1 and a_id= "+user.ID;
   if(mx.length>0)
     { str = str + " and P_sug_price<="+Number(mx);}

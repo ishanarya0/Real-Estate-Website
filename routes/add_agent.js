@@ -46,11 +46,12 @@ router.get("/buyer",function(req,res){
   });
 
 router.post('/agent',function(req,res){
-  var user =  req.session.user;
-  if(user == null){
-    res.redirect("/loginOffice");
-    return;
- }
+  
+     var user =  req.session.user;
+     if(user == null){
+      res.redirect("/loginOffice");
+      return;
+   }
      var s = "select * from agent where Email="+"'"+req.body.email+"'";
      
      var s = "insert into agent(Firstname,Lastname,Email,contact) values ("+"'"+req.body.first_name+"',"+"'"+req.body.last_name+"',";
@@ -88,6 +89,7 @@ router.post('/agent',function(req,res){
   });
 
   router.post('/buyer',function(req,res){
+    console.log(req.body.email);
     var user =  req.session.user;
     if(user == null){
       res.redirect("/loginOffice");
@@ -115,11 +117,12 @@ router.post('/agent',function(req,res){
  });
 
  router.post('/seller',function(req,res){
-  var user =  req.session.user;
-  if(user == null){
-    res.redirect("/loginOffice");
-    return;
- }
+    console.log(req.body.email);
+    var user =  req.session.user;
+    if(user == null){
+      res.redirect("/loginOffice");
+      return;
+   }
     var s = "select * from owner where Email="+"'"+req.body.email+"'";
     
     var s = "insert into owner(Firstname,Lastname,Email,contact) values ("+"'"+req.body.first_name+"',"+"'"+req.body.last_name+"',";

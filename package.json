@@ -8,9 +8,8 @@
     "start": "node app.js"
   },
   "author": {
-    "name": "Adam",
-    "email": "jstutorials1@gmail.com",
-    "url": "http://www.js-tutorials.com/"
+    "name": "Ishan Arya",
+    "email": "ishanarya0@gmail.com"
   },
   "license": "MIT",
   "dependencies": {

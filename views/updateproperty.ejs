@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/main.css">
@@ -34,29 +34,38 @@
           <b style="color: red; text-align: center;">If seller not listed in the list, then first add seller :</b>
          <br> <a href="/agent/add/seller" class="btn btn-primary" style="padding: 15px 40px 15px 40px; margin-top: 10px;">Add Seller</a>
         </div>
-         
+        
         <div class="card">
 
             <div class="card-body box2">
-              <strong>Add A Property</strong>
+              <strong>Update Property</strong>
 
-              <form  action="/agent/add/property" method="POST">
+              <form  action="../../add/propertyUpdate" method="POST">
               
+                <div class="form-group row">
+                    <label for="example-bhk-input">P_ID</label>                        
+                    <input class="form-control" type="number"  name ="propid" value="<%=curr[0].ID%>" id="example-bhk-input" readonly>
+                  </div>
+
                   <div class="form-group row">
                     <label for="example-date-input">Date</label>
-                    <input class="form-control" type="date"  name="date" id="example-date-input" required>
+                    <input class="form-control" type="date"  name="date" value="<%=curr[0].L_date%>" id="example-date-input" required>
                   </div>  
                 
                   <div class="form-group row">
                   <label  for="inlineFormCustomSelect">Select Seller</label>
                   <select class="custom-select " id="inlineFormCustomSelect" required name ="seller">
-                    <option selected  >Choose...</option>
+                    <option >Choose...</option>
                     <%if(Data.length!=0){
                       Data.forEach(function(data){
                       %>
+
+                     <% if(data.ID != curr[0].o_ID){ %>
                     <option value="<%= data.ID%>" ><%= data.Firstname%> <%= data.Lastname%></option>
-                    
-                    <% })} %>
+                    <% }else{ %>
+                    <option value="<%= data.ID%>" selected><%= data.Firstname%> <%= data.Lastname%></option>
+
+                    <% } })} %>
                     
                   </select>
                   </div>
@@ -64,58 +73,92 @@
                      
                   <div class="form-group row">
                     <label  for="inlineFormCustomSelect">Property type</label>
-                    <select class="custom-select " id="inlineFormCustomSelect" required name="type">
-                      <option selected >Choose...</option>
-                      <option value="1" >Flat</option>
+                    <select class="custom-select " id="inlineFormCustomSelect"  required name="type">
+                      <option  >Choose...</option>
+                      <% if(curr[0].P_type) { %>
+                        
+                        <option selected value="1" >Flat</option>
                       <option value="0">House</option>
+                    
+                   <% }else{ %>
+                    <option  value="1" >Flat</option>
+                    <option selected value="0">House</option>
+                   <% } %>
+
+                      
                     </select>
                     </div>
 
                     <div class="form-group row">
                       <label  for="inlineFormCustomSelect">Property Status</label>
                       <select class="custom-select status" id="inlineFormCustomSelect" required name="status">
-                        <option selected name="status">Choose...</option>
-                        <option value="0" name="status">For Sale</option>
-                        <option value="1" name="status">For Rent</option>
+                        <option name="status">Choose...</option>
+                       <% if(curr[0].P_tag) { %>
+                        
+                            <option selected value="1" name="status">For Rent</option>
+                            <option value="0" name="status">For Sale</option>
+                        
+                       <% }else{ %>
+                            <option  value="1" name="status">For Rent</option>
+                            <option selected value="0" name="status">For Sale</option>
+                       <% } %>
                       </select>
                       </div>
                    
-                    
 
                       <div class="form-group row">
                         <label for="example-bhk-input">BHK</label>                        
-                        <input class="form-control" type="number"  name ="bhk" id="example-bhk-input" required>
+                        <input class="form-control" type="number"  name ="bhk" value="<%=curr[0].bhk%>" id="example-bhk-input" required>
                       </div>
 
                       <div class="form-group row">
                         <label for="example-size-input"  >Size in sq.ft</label>                        
-                        <input class="form-control" type="number"  name ="size" id="example-size-input" required>
+                        <input class="form-control" type="number"  name ="size" value="<%=curr[0].P_size %>" id="example-size-input" required>
                       </div>
 
                       <div class="form-group row">
                         <label for="example-bth-input"  >Number of Bathrooms</label>                        
-                        <input class="form-control" type="number"  name ="bath" id="example-bth-input" required>
+                        <input class="form-control" type="number"  name ="bath" value="<%=curr[0].ID %>" id="example-bth-input" required>
                       </div>
 
+                      <% var address = curr[0].adress.split(","); %>
                       <div class="form-group row">
                         <label for="example-text-input1" >House Number/Flat Number</label>
-                          <input class="form-control" type="number"  name ="hno"  id="example-text-input1" required>
+                          <input class="form-control" type="number"  name ="hno"  value="<%=address[0]%>" id="example-text-input1" required>
                       </div>
 
                       <div class="form-group row">
                         <label for="example-price-input"  >Cost (Rs)</label>                        
-                        <input class="form-control" type="number"  name ="cost" id="example-price-input">
+                        <input class="form-control" type="number"  name ="cost" value="<%=curr[0].P_sug_price%>" id="example-price-input">
                       </div>
 
                       <div class="form-group row">
                         <label for="example-text-input2" >Property Name</label>
-                          <input class="form-control" type="text"  name ="pname" id="example-text-input2">
+                        <% if(curr[0].P_type){ %>
+                          <input class="form-control" type="text"  name ="pname" value="<%= address[1]%>" id="example-text-input2">
+                      <%  }else{ %>
+                            <input class="form-control" type="text"  name ="pname" id="example-text-input2">
+                       <% } %>
                       </div>
 
                       <div class="form-group row">
+                        <label for="example-text-input2" >Property Desc</label>
+                     
+                          <input class="form-control" type="text"  name ="pdesc" value="<%=curr[0].P_desc %>" id="example-text-input2">
+                   
+                      </div>
+
+
+                      <div class="form-group row">
                         <label for="example-text-input3" >Road</label>
+                      
+                        <% if(curr[0].P_type){ %>
+                            <input class="form-control" type="text"  name ="road" value="<%= address[2] %>" id="example-text-input3" required>
+                        <%  }else{ %>
+                            <input class="form-control" type="text"  name ="road" value="<%= address[1] %>" id="example-text-input3" required>
+                         <% } %>
+
                         
-                        <input class="form-control" type="text"  name ="road" id="example-text-input3" required>
                         
                       </div>
 

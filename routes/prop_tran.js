@@ -17,12 +17,11 @@ con.connect(function(err) {
 
 
  router.get('/:thing',function(req,res){
-      console.log(req.url);
-      var user =  req.session.user;
-      if(user == null){
-        res.redirect("/loginOffice");
-        return;
-     }
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/loginOffice");
+    return;
+ }
       var d = req.params.thing;
       if(d==="rent") 
       {

@@ -31,7 +31,7 @@ var prr,pss,ts;
               //  con.query("select username from login where a_id="+d.substring(1),(err, agnt1) => {
                 var user =  req.session.user;
                 console.log(user);
-                res.render("ag_profile.ejs",{user : user, tit : "Agent",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID});
+                res.render("ag_profile.ejs",{user : user, tit : "Agent",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID,flag : 3});
                // });
        });
       }
@@ -41,20 +41,28 @@ var prr,pss,ts;
       con.query(s,(err, agnt) => {
         var user =  req.session.user;
         console.log(user);
-        res.render("ag_profile.ejs",{user : user, tit : "Buyer",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID});
+
+        con.query("select * from tran_rent t,property p where p.ID=t.p_id and t.b_id="+agnt[0].ID,(err, agent) => {
+          con.query("select * from tran_sale t,property p where p.ID=t.p_id and t.b_id="+agnt[0].ID,(err, agent1) => {
+     
+            res.render("ag_profile.ejs",{user : user, tit : "Buyer",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID,flag : 1,userDataRent : agent,userDataSale : agent1});
+             });
+          });
        });
       }
-
+     
       if(d[0]==="s")
       { var s = "select * from owner where ID ="+d.substring(1);
       con.query(s,(err, agnt) => {
         var user =  req.session.user;
         console.log("SELLER ME HAI APUN!");
         console.log(user);
-        res.render("ag_profile.ejs",{ user : user, tit : "Seller",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID});
+        con.query("select * from property  where o_ID="+agnt[0].ID,(err, agent1) => {
+        res.render("ag_profile.ejs",{ user : user, tit : "Seller",name : agnt[0].Firstname+" "+agnt[0].Lastname, con : agnt[0].contact, email : agnt[0].Email, id : agnt[0].ID, user : agnt[0].ID,flag : 2,userData : agent1});
        });
+      }); 
       }
-      
+       
      
       if(d> 0)
       {     d=d+"";
@@ -85,8 +93,11 @@ var prr,pss,ts;
                             con.query("select * from agent where ID ="+Number(d),(err, agnt) => {
                               var user =  req.session.user;
                               console.log(user);
-                            res.render("report.ejs",{user :    user,name : agnt[0].Firstname+" "+agnt[0].Lastname,  id : agnt[0].ID, userDataSale : agnt2 , userDataRent : agnt1, sale : ts, pr : prr, ps:pss});
-                           });
+                              con.query("select * from property where P_status = 1 and a_ID ="+Number(d),(err, ag) => {
+
+                                res.render("report.ejs",{user : user,name : agnt[0].Firstname+" "+agnt[0].Lastname,  id : agnt[0].ID, userDataSale : agnt2 , userDataRent : agnt1, sale : ts, pr : prr, ps:pss, userDataPen : ag});
+                              });
+                              });
                         });
                     
                     });

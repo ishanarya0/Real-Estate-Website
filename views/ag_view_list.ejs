@@ -127,6 +127,7 @@
                             <th>BHK</th>
                             <th>Tag</th>
                             <th>Type</th>
+                            <th>Update</th>
                     </tr>
                     <%
                         if(userData.length!=0){
@@ -144,6 +145,7 @@
                             <td><%=data.bhk %></td>
                             <td><%if(data.P_tag===1){%> Rent <%} else {%> Sale <% } %></td>
                             <td><%if(data.P_type===1){%> Apartm. <%} else {%> House <% } %></td>
+                            <td><a href="../../agent/add/propertyUpdate/<%=data.ID%>">Update</a></td>
                         </tr>
 
                     <%  i++;}) %>

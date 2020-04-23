@@ -37,10 +37,10 @@ var mysql = require('mysql');
   router.get('/buyer',function(req,res){
     console.log(req.url);
     var user =  req.session.user;
-    if(user == null){
-      res.redirect("/loginOffice");
-      return;
-   }
+      if(user == null){
+        res.redirect("/loginOffice");
+        return;
+     }
     con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
       var user =  req.session.user;
       res.render("view_aggent.ejs",{user : user,userData : agnt, tit : "Buyer",flag : 1});
@@ -53,10 +53,10 @@ var mysql = require('mysql');
 router.get('/seller',function(req,res){
     console.log(req.url);
     var user =  req.session.user;
-    if(user == null){
-      res.redirect("/loginOffice");
-      return;
-   }
+      if(user == null){
+        res.redirect("/loginOffice");
+        return;
+     }
     con.query("select ID,Firstname,Lastname from owner",(err, agnt) => {
       var user =  req.session.user;
       res.render("view_aggent.ejs",{user : user, userData : agnt, tit : "Seller", flag : 1});
@@ -68,10 +68,10 @@ router.get('/seller',function(req,res){
 router.get('/property',function(req,res){
   console.log(req.url);
   var user =  req.session.user;
-  if(user == null){
-    res.redirect("/loginOffice");
-    return;
- }
+      if(user == null){
+        res.redirect("/loginOffice");
+        return;
+     }
   con.query("select * from property where P_status=1",(err, agnt) => {
   console.log(agnt);
   var user =  req.session.user;

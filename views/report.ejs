@@ -12,6 +12,8 @@
     <style>
         
         #table1{
+            border-radius: 10px;
+            background-color: lightgrey;
             display: none;
             border-spacing:0 15px; 
             border-collapse: separate; 
@@ -20,7 +22,13 @@
             box-shadow: 1px 1px 10px 1px; 
         }
 
-        #table2{
+        tr{
+           background-color: white;
+        }
+
+        #table2,#table3{
+            border-radius: 10px;
+            background-color: lightgrey;
             display: none;
             border-spacing:0 15px; 
             border-collapse: separate; 
@@ -40,22 +48,30 @@
     <script>
         function table_show(i) {
              var x = document.getElementById(i);
-             if(i==="table1" && document.getElementById("table2").style.display==="block")
+             if(i==="table1")
              {
                  x.style.display="block";
                  document.getElementById("table2").style.display="none";
+                 document.getElementById("table3").style.display="none";
                  return;
                 }
-             if(i==="table2" && document.getElementById("table1").style.display==="block")
+             if(i==="table2" )
              {
                  x.style.display="block";
                  document.getElementById("table1").style.display="none";
+                 document.getElementById("table3").style.display="none";
                  return;
              }
-             x.style.display="block";
+
+             if(i==="table3" )
+             {
+                 x.style.display="block";
+                 document.getElementById("table1").style.display="none";
+                 document.getElementById("table2").style.display="none";
+                 return;
+             }
 
             }
-    
         
 
     </script>
@@ -69,125 +85,166 @@
                     <a class="head_a" href="/home/logoutOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 50px; margin-top:10px; float: right; text-decoration: none; color: white;">Logout</a></div>
             
 
-            <div class="main"  style="margin : 60px auto 0 auto; width: 90%; height: auto; text-align: center; border-radius: 10px;box-shadow: 1px 1px 10px 1px; ">
-              <br><br> 
-              <div style="width: 80%; margin :0px auto 0px auto; height: 50px;">
-                 <span id="a_name" style="float:left; font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;">Name : <%= name %></span>
-                 <span id="a_name" style="float:right; font-weight : 700 ;font-size: 26px; margin-left: 20px; margin-right: 50px;">Agent ID : <%= id %></span>    
-              </div>
-
-
-             <div style="width: 80%; height:200px; margin: 30px auto 0px auto; ">
-                <div style="float: left;width: 200px; height: 150px; margin-left: 40px; border-radius: 10px;box-shadow: 1px 1px 10px 1px; text-align: center; background-color: #0275d8;">
-                    <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= sale %></p><br><br>
-                    <p style="color: white; font-weight: 500;">Total Sale</p>
-                </div>
-                <div style="float: right;border-radius: 10px;box-shadow: 1px 1px 10px 1px; width: 200px; height: 150px; margin-right: 40px; text-align: center; background-color: #0275d8;">
-                   <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= pr %></p><br><br>
-                    <p style="color: white; font-weight: 500;">Properties on Rent</p>
-                </div>
-                <div style="border-radius: 10px;box-shadow: 1px 1px 10px 1px; width: 200px; height: 150px; margin: auto; background-color: #0275d8;">
-                    <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= ps %></p><br><br>
-                    <p style="color: white; font-weight: 500;">Properties sold</p>
-                </div>
-             </div>
-              
-             <div style="width: 60%; height:100px; margin: 30px auto 0px auto; ">
-             <div  onclick="table_show('table1');" style="float :right; padding :20px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 20px 20px 0px 20px; ">PROPERTIES SOLD</div>
-             <div onclick="table_show('table2');" style="float: left; padding :20px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 20px 20px 0px 20px; ">PROPERTIES RENTED</div>
-              
-            </div>
+                    <div class="main"  style="margin : 60px auto 0 auto; width: 90%; height: auto; text-align: center; border-radius: 10px;box-shadow: 1px 1px 10px 1px; ">
+                        <br><br> 
+                        <div style="width: 80%; margin :0px auto 0px auto; height: 50px;">
+                           <span id="a_name" style="float:left; font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;">Name : <%= name %></span>
+                           <span id="a_name" style="float:right; font-weight : 700 ;font-size: 26px; margin-left: 20px; margin-right: 50px;">Agent ID : <%= id %></span>    
+                        </div>
+          
+          
+                       <div style="width: 80%; height:200px; margin: 30px auto 0px auto; ">
+                          <div style="float: left;width: 200px; height: 150px; margin-left: 40px; border-radius: 10px;box-shadow: 1px 1px 10px 1px; text-align: center; background-color: #0275d8;">
+                              <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= sale %></p><br><br>
+                              <p style="color: white; font-weight: 500;">Total Sale</p>
+                          </div>
+                          <div style="float: right;border-radius: 10px;box-shadow: 1px 1px 10px 1px; width: 200px; height: 150px; margin-right: 40px; text-align: center; background-color: #0275d8;">
+                             <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= pr %></p><br><br>
+                              <p style="color: white; font-weight: 500;">Properties on Rent</p>
+                          </div>
+                          <div style="border-radius: 10px;box-shadow: 1px 1px 10px 1px; width: 200px; height: 150px; margin: auto; background-color: #0275d8;">
+                              <br><br> <p style="border-radius: 50%; background-color: white; padding: 10px; font-weight: 500;"><%= ps %></p><br><br>
+                              <p style="color: white; font-weight: 500;">Properties sold</p>
+                          </div>
+                         
+                       </div>
+                        
+                       <div style="width: 90%; height:100px; margin: 30px auto 0px auto; ">
+                       
+                       <div  onclick="table_show('table1');" style="float :right; padding :20px; background-color: #0275d8; color :white; border-radius: 10px; width :25%; margin: 20px 20px 0px 20px;  ">PROPERTIES SOLD</div>
+                       <div onclick="table_show('table2');" style="float: left; padding :20px; background-color: #0275d8; color :white; border-radius: 10px; width :25%; margin: 20px 20px 0px 20px; ">PROPERTIES RENTED</div>
+                       <div onclick="table_show('table3');" style="float: left; padding :20px; background-color: #0275d8; color :white; border-radius: 10px; width :25%; margin: 20px 72px 0px 72px; ">PROPERTIES PENDING</div>
+                        
+                      </div>
+                      
+                      <div >
+                          <table id="table1">
+                            <%
+                              if(1){ %>
+                                  <tr> 
+                                      <th style="width: 134px;">Tran. ID</th>
+                                      <th style="width: 134px;">Prop. ID</th>
+                                      <th style="width: 450px; overflow:hidden">Address</th>
+                                      <th style="width: 134px;">BHK</th>
+                                      <th style="width: 154px;">Selling Price</th>
+                                      <th style="width: 134px;">Sale Date</th>
+                                 </tr>
+                              
+                              <%
+                              if(userDataSale.length!=0){
+                              var i=1;
+                              userDataSale.forEach(function(data){
+                              %>
+          
+                              <tr>
+                                  <tr>
+                                      <td><%=data.TS_ID %></td>
+                                      <td><%=data.p_id %></td>
+                                      <td><%=data.adress %></td>
+                                      <td><%=data.bhk %></td>
+                                      <td><%=data.sell_price %></td>
+                                      <td><% var a =  data.s_date.toDateString().substring(4,16);%>
+                                          <%= a%></td>
+                                     
+                                  </tr>
+                              </tr>
+          
+                              <%  i++;}) %>
+                              <% } else{ %>
+                              <tr>
+                                  <td colspan="6">No Data Found</td>
+                              </tr>
+                              <% } } %>
+                             
+                          </table>
+                          
+                      </div>
+                      <div>
+                          <table id="table2">
+                             
+                               
+                                <%
+                                if(1){   %>
+                                    <tr> 
+                                        <th style="width: 134px;">Tran. ID</th>
+                                        <th style="width: 134px;">Prop. ID</th>
+                                        <th style="width: 400px; overflow:hidden">Address</th>
+                                        <th style="width: 134px;">BHK</th>
+                                        <th style="width: 154px;">Rent</th>
+                                        <th style="width: 134px;">Sale Date</th>
+                                        <th style="width: 134px;">End Date</th>
+                                   </tr>
+                               
+                                <%
+                                if(userDataRent.length!=0){
+                                var i=1;
+                                userDataRent.forEach(function(data){
+                                %>
             
-            <div >
-                <table id="table1">
-                  <%
-                    if(1){ %>
-                        <tr> 
-                            <th style="width: 134px;">Tran. ID</th>
-                            <th style="width: 134px;">Prop. ID</th>
-                            <th style="width: 400px; overflow:hidden">Address</th>
-                            <th style="width: 134px;">BHK</th>
-                            <th style="width: 154px;">Selling Price</th>
-                            <th style="width: 134px;">Sale Date</th>
-                       </tr>
-                    
-                    <%
-                    if(userDataSale.length!=0){
-                    var i=1;
-                    userDataSale.forEach(function(data){
-                    %>
-
-                    <tr>
-                        <tr>
-                            <td><%=data.TS_ID %></td>
-                            <td><%=data.p_id %></td>
-                            <td><%=data.adress %></td>
-                            <td><%=data.bhk %></td>
-                            <td><%=data.sell_price %></td>
-                            <td><% var a =  data.s_date.toDateString().substring(4,16);%>
-                                <%= a%></td>
-                           
-                        </tr>
-                    </tr>
-
-                    <%  i++;}) %>
-                    <% } else{ %>
-                    <tr>
-                        <td colspan="6">No Data Found</td>
-                    </tr>
-                    <% } } %>
-                   
-                </table>
-                
-            </div>
-            <div>
-                <table id="table2">
-                   
-                     
-                      <%
-                      if(1){   %>
-                          <tr> 
-                              <th style="width: 134px;">Tran. ID</th>
-                              <th style="width: 134px;">Prop. ID</th>
-                              <th style="width: 400px; overflow:hidden">Address</th>
-                              <th style="width: 134px;">BHK</th>
-                              <th style="width: 154px;">Rent</th>
-                              <th style="width: 134px;">Sale Date</th>
-                              <th style="width: 134px;">End Date</th>
-                         </tr>
-                     
-                      <%
-                      if(userDataRent.length!=0){
-                      var i=1;
-                      userDataRent.forEach(function(data){
-                      %>
-  
-                      <tr>
-                          <td><%=data.TR_ID %></td>
-                          <td><%=data.p_id %></td>
-                          <td><%=data.adress %></td>
-                          <td><%=data.bhk %></td>
-                          <td><%=data.rent %></td>
-                          <td><% var a =  data.st_date.toDateString().substring(4,16);%>
-                              <%= a%></td>
-                          <td><% var a =  data.end_date.toDateString().substring(4,16);%>
-                              <%= a%></td>
-                      </tr>
-  
-                      <%  i++;}) %>
-                      <% } else{ %>
-                      <tr>
-                          <td colspan="7">No Data Found</td>
-                      </tr>
-                      <% } } %>
-  
-  
-                  </table>
-                
-            </div>
-            <br><br><br>
-            </div>
-
-    
-    </body>
-</html>
+                                <tr>
+                                    <td><%=data.TR_ID %></td>
+                                    <td><%=data.p_id %></td>
+                                    <td><%=data.adress %></td>
+                                    <td><%=data.bhk %></td>
+                                    <td><%=data.rent %></td>
+                                    <td><% var a =  data.st_date.toDateString().substring(4,16);%>
+                                        <%= a%></td>
+                                    <td><% var a =  data.end_date.toDateString().substring(4,16);%>
+                                        <%= a%></td>
+                                </tr>
+            
+                                <%  i++;}) %>
+                                <% } else{ %>
+                                <tr>
+                                    <td colspan="7">No Data Found</td>
+                                </tr>
+                                <% } } %>
+                          
+                              <table id="table3">
+                                  <tr>
+                                      <th style="width: 134px;">P_ID</th>
+                                      <th style="width: 134px;">L_date</th>
+                                      <th style="width: 400px; overflow:hidden">Address</th>
+                                      <th style="width: 134px;">Prop. price</th>
+                                      <th style="width: 134px;">Prop size(sq.ft) </th>
+                                      <th style="width: 134px;">BHK</th>
+                                      <th style="width: 134px;">Tag</th>
+                                      <th style="width: 134px;">Type</th>
+                                  </tr>
+                                  <%
+                                      if(userDataPen.length!=0){
+                                      var i=1;
+                                      userDataPen.forEach(function(data){
+                                  %>
+                                      <tr>
+                                          <td><%=data.ID %></td>
+                                          <td><% var a =  data.L_date.toDateString().substring(4,16);%>
+                                             <%= a%>   
+                                          </td>
+                                          <td><%=data.adress %></td>
+                                          <td><%=data.P_sug_price %></td>
+                                          <td><%=data.P_size %></td>
+                                          <td><%=data.bhk %></td>
+                                          <td><%if(data.P_tag===1){%> Rent <%} else {%> Sale <% } %></td>
+                                          <td><%if(data.P_type===1){%> Apartm. <%} else {%> House <% } %></td>
+                                      </tr>
+              
+                                  <%  i++;}) %>
+                                  <% } else{ %>
+                                  <tr>
+                                      <td colspan="8">No Data Found</td>
+                                  </tr>
+                                  <% } %>
+                                  
+              
+                              </table>
+            
+                            </table>
+                          
+                      </div>
+                      <br><br><br>
+                      </div>
+          
+              
+              </body>
+          </html>

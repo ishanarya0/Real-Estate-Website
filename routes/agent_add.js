@@ -31,6 +31,26 @@ router.get("/property",function(req,res){
     });
   });
 
+  router.get("/propertyUpdate/:propid",function(req,res){
+  console.log("I AM IN UPDATE");
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+    con.query("select ID,Firstname,Lastname from owner",(err, agnt) => {
+      var propid = req.params.propid;
+      con.query("select * from property where ID="+propid,(err,currData) =>{
+        console.log(currData);
+        console.log(typeof currData[0].o_id);
+        var user = req.session.user;
+        res.render("updateproperty.ejs",{ user: user, error : "",Data : agnt, curr : currData});
+      });
+     
+    
+      });
+    });
+    
 router.get("/buyer",function(req,res){
   var user =  req.session.user;
   if(user == null){
@@ -57,7 +77,9 @@ router.get("/payment",function(req,res){
  }
   con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
     var user = req.session.user;
-    res.render("payment.ejs",{user: user ,error : "",Data : agnt});
+    con.query("select ID,P_tag from property where P_status=1 and a_ID="+user.ID,(err, agnt1) => {
+      res.render("payment.ejs",{user : user, error :"",Data : agnt,Data1 : agnt1});
+    });
   
     });
   });
@@ -99,6 +121,40 @@ router.post("/property",function(req,res){
   });
 });
 
+router.post("/propertyUpdate",function(req,res){
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+  var s = "update property set P_status=1,L_date ='"+ req.body.date+ "',adress='" +req.body.hno+", ";
+  
+  
+  if(req.body.type==1){
+  s+=req.body.pname+", ";
+  }
+
+  s= s +req.body.road+" "+req.body.zip+"'";
+
+  s=s+",bhk ="+ req.body.bhk+",P_size ="+ req.body.size+",P_type="+ req.body.type+",P_tag="+ req.body.status +",P_sug_price ="+ req.body.cost+",bathrooms="+ req.body.bath+",P_desc='"+req.body.pdesc+"',o_ID="+ req.body.seller+",a_ID="+user.ID+" where ID="+ req.body.propid;
+  console.log(s);
+ con.query(s,(err, agnt) => {
+       if(err){
+       con.query("select ID,Firstname,Lastname from owner",(err, agnt) => {
+        var user = req.session.user;
+       res.render("addproperty.ejs",{user : user ,error : "Some Date is in wrong formate !!",Data : agnt});
+       });
+      }
+      else{
+        con.query("select ID,Firstname,Lastname from owner",(err, agnt) => {
+          var user = req.session.user;
+          res.render("addproperty.ejs",{user: user, error : " Property added suceesfully !",Data : agnt});
+          });
+      }
+
+  });
+  
+});
 
 
 
@@ -111,17 +167,21 @@ router.post("/payment",function(req,res){
     res.redirect("/login");
     return;
  }
+
   if(req.body.tran_type=="1")
   {
     console.log("rent");
+    console.log(req.body.pid);
     con.query("select P_status from property where ID="+Number(req.body.pid),(err, agnt) => {
       console.log(agnt);
       if(agnt[0].P_status==0){
         console.log(agnt);
         con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
           var user = req.session.user;
-          res.render("payment.ejs",{user : user, error : "Property already transacted ! Not available",Data : agnt});
+          con.query("select ID,P_tag from property where P_status=1 and a_ID="+user.ID,(err, agnt1) => {
+          res.render("payment.ejs",{user : user, error : "Property already transacted ! Not available",Data : agnt,Data1 : agnt1});
         });
+      });
       }
       else
       {
@@ -134,8 +194,9 @@ router.post("/payment",function(req,res){
         s+=","+user.ID;
         s+=","+Number(req.body.pid);
         s+=","+Number(req.body.buyer)+")";
+       
         console.log(s);
-
+        
         con.query(s,(err, a) => {
           if(err){
             console.log(err);
@@ -150,19 +211,27 @@ router.post("/payment",function(req,res){
                  console.log(err);
                  con.rollback(function() {
                   throw err;
+                  return;
                 });
               }
               con.commit(function(err) {
                 if (err) { 
                   con.rollback(function() {
                     throw err;
+                    return;
                   });
                 }
                 console.log('Transaction Complete.');
                 con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
                   var user = req.session.user;
-                  res.render("payment.ejs",{user : user, error : "! Transaction successful !",Data : agnt});
+                  console.log("buyer");
+                  console.log(user.ID);
+                  con.query("select ID,P_tag from property where P_status=1 and a_ID="+user.ID,(err, agnt1) => {
+                    console.log(agnt1);
+                    res.render("payment.ejs",{user : user, error : "Transaction complete !",Data : agnt,Data1 : agnt1});
+                  });
                 });
+
               });
                
                
@@ -181,7 +250,10 @@ router.post("/payment",function(req,res){
         console.log(agnt);
         con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
           var user = req.session.user;
-          res.render("payment.ejs",{user : user, error : "Property already transacted ! Not available",Data : agnt});
+
+          con.query("select ID,P_tag from property where P_status=1 and a_ID="+user.ID,(err, agnt1) => {
+            res.render("payment.ejs",{user : user, error : "Property already transacted ! Not available",Data : agnt,Data1 : agnt1});
+          });
         });
       }
       else
@@ -221,7 +293,9 @@ router.post("/payment",function(req,res){
                 console.log('Transaction Complete.');
                 con.query("select ID,Firstname,Lastname from buyer",(err, agnt) => {
                   var user = req.session.user;
-                  res.render("payment.ejs",{user : user, error : "! Transaction successful !",Data : agnt});
+                  con.query("select ID,P_tag from property where P_status=1 and  a_ID="+user.ID,(err, agnt1) => {
+                    res.render("payment.ejs",{user : user, error : "Transaction complete !",Data : agnt,Data1 : agnt1});
+                  });
                 });
               });
                

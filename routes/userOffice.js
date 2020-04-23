@@ -57,13 +57,14 @@ exports.login = function(req, res){
            
 exports.dashboard = function(req, res, next){
            
-   var user =  req.session.user;
-   
-   if(user == null){
+   var user =  req.session.user,
+   username = user.username;
+   console.log('ddd='+username);
+   if(username == null){
       res.redirect("/loginOffice");
       return;
    }
-   username = user.username;
+
    var pc,ac,tc,bc,sc,ts;
    db.query("select count(*) as c from property where P_status=1",(err, pro) => {
       pc = pro[0].c;  });
