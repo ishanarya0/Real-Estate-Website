@@ -92,14 +92,17 @@ router.post("/property",function(req,res){
  }
   var s = "insert into property(P_status,L_date,adress,bhk,P_size,P_type,P_tag,P_sug_price,bathrooms,P_desc,o_ID,a_ID) values (1";
   s+= ",'"+req.body.date+"'";
-  s+= ",'"+req.body.hno+" "+req.body.road+" ,"+req.body.zip+"'";
+  if(Number(req.body.type)==0){
+  s+= ",'"+req.body.hno+","+req.body.road+" ,"+req.body.zip+"'";}
+  if(Number(req.body.type)==1){
+    s+= ",'"+req.body.hno+","+req.body.pname+" ,"+req.body.road+" ,"+req.body.zip+"'";}
   s+=","+Number(req.body.bhk);
   s+=","+Number(req.body.size);
   s+=","+Number(req.body.type);
   s+=","+Number(req.body.status);
   s+=","+Number(req.body.cost);
   s+=","+Number(req.body.bath);
-  s+=",'"+req.body.pname+"'";
+  s+=",'"+req.body.prop_desc+"'";
   s+=","+Number(req.body.seller);
   s+=","+user.ID+")";
 

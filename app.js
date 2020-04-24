@@ -88,4 +88,4 @@ app.use('/agent/view', ag_view_list );
 
 
 //Middleware
-app.listen(process.env.PORT || 8080)
+app.listen(8080)

@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Add Property Page</title>
 
+    <style>
+      #flat{
+        display: none;
+      }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -64,7 +69,7 @@
                      
                   <div class="form-group row">
                     <label  for="inlineFormCustomSelect">Property type</label>
-                    <select class="custom-select " id="inlineFormCustomSelect" required name="type">
+                    <select class="custom-select "  id="f" onchange="show();" required name="type">
                       <option selected >Choose...</option>
                       <option value="1" >Flat</option>
                       <option value="0">House</option>
@@ -107,8 +112,8 @@
                         <input class="form-control" type="number"  name ="cost" id="example-price-input">
                       </div>
 
-                      <div class="form-group row">
-                        <label for="example-text-input2" >Property Name</label>
+                      <div class="form-group row" id="flat">
+                        <label for="example-text-input2"  style="float: left;">Property Name</label>
                           <input class="form-control" type="text"  name ="pname" id="example-text-input2">
                       </div>
 
@@ -122,6 +127,11 @@
                       <div class="form-group row">
                         <label for="inputZip">Zip</label>
                         <input class="form-control" type="text"  name ="zip" id="inputZip" required>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputZip">Property Description</label>
+                        <input class="form-control" type="text"  name ="prop_desc" id="inputZip" required>
                       </div>
 
                       <div class="form-group">
@@ -162,6 +172,25 @@
                       });
                     }, false);
                   })();
+
+
+                  function show(){
+                    var b = document.getElementById("f");
+                    console.log(b);
+                    var a = b.options[b.selectedIndex].value;
+                   console.log(a);
+                    if(a==0)
+                    {  
+                      
+                       document.getElementById("flat").style.display="none";
+                      
+                    }
+                    if(a==1)
+                    { 
+                      document.getElementById("flat").style.display="block";
+                      
+                    }
+                  }
                   </script>
      
 

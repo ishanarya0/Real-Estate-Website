@@ -74,7 +74,25 @@
 
              <div class="main"  style="margin : 50px auto 0 auto; width: 100%; height: auto; text-align: center; height: 500px; overflow-y: scroll; ">
                     <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %> List</b></em></div>
-                    <br><br> 
+                    <br>
+                    <form action="/office/view/property" method="POST" style=" height:70px">
+                        <label for="min" style="margin-left: 10px;">Min. Price</label>
+                        <input type="text" name="min_price" id="min"  style="border-radius: 4px;">
+                        <label for="max" style="margin-left: 20px;">Max. Price</label>
+                        <input type="text" name="max_price" id="max" style="border-radius: 4px;">
+                        <label for="sale" style="margin-left: 20px;">Sale</label>
+                        <input type="checkbox" name="sale" id="sale" >
+                        <label for="rent" style="margin-left: 20px; " >Rent</label>
+                        <input type="checkbox" name="rent" id="rent" >
+                        <label for="house" style="margin-left: 20px;">House</label>
+                        <input type="checkbox" name="house" id="house" >
+                        <label for="aprt" style="margin-left: 20px; " >Apart.</label>
+                        <input type="checkbox" name="aprt" id="aprt" >
+                        <label for="address" style="margin-left: 20px; ">Address</label>
+                        <input type="text" name="addres" id="address" style="margin-right: 20px;border-radius: 4px;">
+                        <input type="submit" style="padding :5px; background-color: #0275d8; color :white; border-radius: 10px; ">
+                    </form>
+                    <br> 
                     <table style="width:90%; height: 200px; overflow-y: scroll; margin :auto ;   border-spacing:0 15px;  border-collapse: separate;background-color: lightgrey;border-radius: 10px; box-shadow: 1px 1px 10px 1px; ">
                     
                     <tr>

@@ -64,23 +64,53 @@ router.get('/seller',function(req,res){
 
  
 });
+var usr;
 
 router.get('/property',function(req,res){
-  console.log(req.url);
-  var user =  req.session.user;
-      if(user == null){
-        res.redirect("/loginOffice");
-        return;
-     }
-  con.query("select * from property where P_status=1",(err, agnt) => {
-  console.log(agnt);
-  var user =  req.session.user;
-  res.render("view_aggent.ejs",{user : user, userData : agnt, tit : "Available Properties", flag : 2});
-   });
+  
+  var str = "select * from property where P_status=1";
+  
+         
+  con.query(str,(err, agnt) => {
+    var user =  req.session.user;
+    
+    res.render("view_aggent.ejs",{user : user,userData : agnt, tit : "Available Properties", flag : 2});
+     });
 
 
 });
 
+
+router.post('/property',function(req,res){
+  var mx = req.body.max_price;
+  var mn = req.body.min_price;
+  var ad = req.body.addres;
+  var s = req.body.sale;
+  var r = req.body.rent;
+  var a = req.body.aprt;
+  var h = req.body.house;
+  var str = "select * from property where P_status=1";
+  if(mx.length>0)
+    { str = str + " and P_sug_price<="+Number(mx);}
+  if(mn.length>0)
+    { str = str + " and P_sug_price>="+Number(mn);}
+  if(ad.length>0)
+    { str = str + " and adress like '%"+ad+"%'";}
+  if(s != null)
+    { str = str + " and P_tag=0";}
+  if(r != null)
+    { str = str + " and P_tag=1";}
+    if(h != null)
+    { str = str + " and P_type=0";}
+  if(a != null)
+    { str = str + " and P_type=1";}
+         
+  con.query(str,(err, agnt) => {
+    var user =  req.session.user;
+    res.render("view_aggent.ejs",{user : user,userData : agnt, tit : "Available Properties", flag : 2});
+     });
+
+});
 
 setInterval(function(){con.query('select 1');},5000);
 module.exports = router;
