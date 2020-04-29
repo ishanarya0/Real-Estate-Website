@@ -57,17 +57,20 @@ exports.login = function(req, res){
            
 exports.dashboard = function(req, res, next){
            
-   var user =  req.session.user,
-   username = user.username;
-   console.log('ddd='+username);
-   if(username == null){
+   var user =  req.session.user;
+   if(user == null){
       res.redirect("/loginOffice");
       return;
    }
+   var username = user.username;
+   console.log('ddd='+username);
+  
 
-   var pc,ac,tc,bc,sc,ts;
-   db.query("select count(*) as c from property where P_status=1",(err, pro) => {
-      pc = pro[0].c;  });
+   var pc,ac,tc,bc,sc,ts,c2;
+   db.query("select count(*) as c from property where P_status=1 union select count(*) as c from property where P_status=2",(err, pro) => {
+      pc = pro[0].c; 
+      c2 = pro[1].c;
+      });
    db.query("select count(*) as c from tran_sale union select count(*) as c from tran_rent",(err, tran) => {
           tc = tran[0].c + tran[1].c;
      
@@ -91,7 +94,7 @@ var sql="SELECT * FROM off_login WHERE username='"+username+"'";
    db.query(sql, function(err, results){
       console.log("Logged in as: ");
       console.log(results);
-      res.render('dashboardOffice.ejs', {user:user,p_c: pc,a_c : ac, b_c : bc,s_c : sc, t_c : tc ,t_s : ts});    
+      res.render('dashboardOffice.ejs', {user:user,p_c: pc,a_c : ac, b_c : bc,s_c : sc, t_c : tc ,t_s : ts,c_2 : c2});    
    });       
 });
    });

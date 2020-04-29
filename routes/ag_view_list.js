@@ -104,6 +104,7 @@ router.post('/property',function(req,res){
   var r = req.body.rent;
   var a = req.body.aprt;
   var h = req.body.house;
+  var o = req.body.oid;
   
   var str = "select * from property where P_status=1 and a_id= "+user.ID;
   if(mx.length>0)
@@ -120,6 +121,8 @@ router.post('/property',function(req,res){
     { str = str + " and P_type=0";}
   if(a != null)
     { str = str + " and P_type=1";}
+    if(o.length>0)
+    { str = str + " and o_ID="+Number(o);}
          
   con.query(str,(err, agnt) => {
     var user = req.session.user;

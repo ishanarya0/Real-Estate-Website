@@ -73,10 +73,12 @@
                         <td><a href="/office/profile/a<%=data.ID%>">Profile</a></td>
                         <% } %>
                         <% if(tit === "Buyer") { %>
-                            <td><a href="/office/profile/b<%=data.ID%>">Profile</a></td>
+                            <td><a href="/office/profile/bA<%=data.ID%>">Profile</a></td>
+                            <td><a href="/agent/add/buyerUpdate/<%=data.ID%>">Update</a></td>
                         <% } %>
                         <% if(tit === "Seller") { %>
-                            <td><a href="/office/profile/s<%=data.ID%>">Profile</a></td>
+                            <td><a href="/office/profile/sA<%=data.ID%>">Profile</a></td>
+                            <td><a href="/agent/add/sellerUpdate/<%=data.ID%>">Update</a></td>
                         <% } %>
                     </tr>
 
@@ -100,9 +102,9 @@
                     <br> 
                     <form action="/agent/view/property" method="POST" style=" height:70px">
                         <label for="min" style="margin-left: 10px;">Min. Price</label>
-                        <input type="text" name="min_price" id="min"  style="border-radius: 4px;">
+                        <input type="text" name="min_price" id="min"  style="border-radius: 4px; width: 100px;">
                         <label for="max" style="margin-left: 20px;">Max. Price</label>
-                        <input type="text" name="max_price" id="max" style="border-radius: 4px;">
+                        <input type="text" name="max_price" id="max" style="border-radius: 4px; width: 100px;">
                         <label for="sale" style="margin-left: 20px;">Sale</label>
                         <input type="checkbox" name="sale" id="sale" >
                         <label for="rent" style="margin-left: 20px; " >Rent</label>
@@ -111,6 +113,8 @@
                         <input type="checkbox" name="house" id="house" >
                         <label for="aprt" style="margin-left: 20px; " >Apart.</label>
                         <input type="checkbox" name="aprt" id="aprt" >
+                        <label for="oid" style="margin-left: 20px; " >Own.ID</label>
+                    <input type="number" name="oid" id="oid" style="border-radius: 4px; width: 50px;">
                         <label for="address" style="margin-left: 20px; ">Address</label>
                         <input type="text" name="addres" id="address" style="margin-right: 20px;border-radius: 4px;">
                         <input type="submit" style="padding :5px; background-color: #0275d8; color :white; border-radius: 10px; ">
@@ -120,6 +124,7 @@
                     
                     <tr style="background-color: #0275d8; color: white; height: 40px; opacity: 70%; ">
                             <th>P_ID</th>
+                            <th>Own_ID</th>
                             <th>L_date</th>
                             <th>Address</th>
                             <th>Prop. price</th>
@@ -128,6 +133,7 @@
                             <th>Tag</th>
                             <th>Type</th>
                             <th>Update</th>
+                            <th>UnList</th>
                     </tr>
                     <%
                         if(userData.length!=0){
@@ -136,6 +142,7 @@
                     %>
                         <tr>
                             <td><%=data.ID %></td>
+                            <td><a href="/office/profile/s<%=data.o_ID%>"><%=data.o_ID %></a></td>
                             <td><% var a =  data.L_date.toDateString().substring(4,16);%>
                                <%= a%>   
                             </td>
@@ -146,12 +153,13 @@
                             <td><%if(data.P_tag===1){%> Rent <%} else {%> Sale <% } %></td>
                             <td><%if(data.P_type===1){%> Apartm. <%} else {%> House <% } %></td>
                             <td><a href="../../agent/add/propertyUpdate/<%=data.ID%>">Update</a></td>
+                            <td><a href="../../agent/add/propertyUnlist/<%=data.ID%>">UnList</a></td>
                         </tr>
 
                     <%  i++;}) %>
                     <% } else{ %>
                     <tr>
-                        <td colspan="8">No Data Found</td>
+                        <td colspan="9">No Data Found</td>
                     </tr>
                     <% } %>
                     

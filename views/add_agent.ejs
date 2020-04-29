@@ -14,7 +14,7 @@
        
 
             <div class="header ">
-                    <span style=" font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;">Office</span>
+                    <span style=" font-weight : 700 ;font-size: 26px; margin-left: 50px; margin-right: 20px;"><% if(tit =="agent"){%>Office<%} else{%>Agent<%}%> </span>
                     <a class="head_a" href="/home/dashboardOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Home</a>
                     <p class="head_a" style=" font-weight : 700 ;margin-left: 20px; margin-right: 20px; text-decoration: none; color: white;">Welcome: <%=user.username%></p>
                     <a class="head_a" href="/home/logoutOffice" style=" font-weight : 700 ;margin-left: 20px; margin-right: 50px; margin-top:10px; float: right; text-decoration: none; color: white;">Logout</a>
@@ -46,7 +46,7 @@
 
                     <div class="form-group" style="margin: 20px auto 0px auto; width : 60%; height: 50px;" >
                     <input type="submit" style="float :left; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 0px auto 0px auto;">
-                    <div style="float :right; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 3px auto 0px auto; cursor: pointer;"onClick="javascript:document.location.href='/office'">CANCEL</div>  
+                    <div style="float :right; padding :10px; background-color: #0275d8; color :white; border-radius: 10px; width :40%; margin: 3px auto 0px auto; cursor: pointer;" onClick="javascript:document.location.href='/home/dashboardOffice'">CANCEL</div>  
                     </div>
                    
                     <p style="color: red; font-size: 15px; margin-top: 10px;"><%= error%></p>

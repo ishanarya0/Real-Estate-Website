@@ -83,7 +83,7 @@ exports.dashboard = function(req, res, next){
       req.session.user = results[0];
       var user = req.session.user;
       console.log(user);
-      res.render('dashboard.ejs', {user:user});    
+      res.render('dashboard.ejs', {user:user,  message: { "text":"","newuser":"", "newpass":""}});    
    });       
 };
 //------------------------------------logout functionality----------------------------------------------

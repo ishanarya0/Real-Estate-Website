@@ -27,9 +27,27 @@
             
            
             
-            <div class="main"  style="margin : 50px auto 0 auto; width: 80%; height: auto; text-align: center; height: 500px; overflow-y: scroll; ">
+            <div class="main"  style="margin : 50px auto 0 auto; width: 100%; height: auto; text-align: center; height: 500px; overflow-y: scroll; ">
                 <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %></b></div>
-                <br><br> 
+                <br>
+                <form  <%if(flag===1){%>action= "/office/prop_tran/sale"<%}else{%>action="/office/prop_tran/rent"<%}%> method="POST" style=" height:70px">
+                    <label for="min" style="margin-left: 10px;">Min. Price</label>
+                    <input type="text" name="min_price" id="min"  style="border-radius: 4px; width: 70px;">
+                    <label for="max" style="margin-left: 20px;">Max. Price</label>
+                    <input type="text" name="max_price" id="max" style="border-radius: 4px;width: 70px;">
+                    <label for="date" style="margin-left: 20px;">Sale Date</label>
+                    <input type="date" name="date" id="date" style="border-radius: 4px; ">
+                    <label for="bhk" style="margin-left: 20px; " >BHK</label>
+                    <input type="number" name="bhk" id="bhk" style="border-radius: 4px; width: 50px;">
+                    <label for="aid" style="margin-left: 20px; " >Ag.ID</label>
+                    <input type="number" name="aid" id="aid" style="border-radius: 4px; width: 50px;">
+                    <label for="bid" style="margin-left: 20px; " >Buy.ID</label>
+                    <input type="number" name="bid" id="bid" style="border-radius: 4px; width: 50px;">
+                    <label for="address" style="margin-left: 20px; ">Address</label>
+                    <input type="text" name="addres" id="address" style="margin-right: 20px;border-radius: 4px; ">
+                    <input type="submit" style="padding :5px; background-color: #0275d8; color :white; border-radius: 10px; ">
+                </form>
+                <br> 
                 
                 <table style="width:90%; height: 200px; overflow-y: scroll; margin :auto ;   border-spacing:0 15px;  border-collapse: separate;background-color: lightgrey;border-radius: 10px; box-shadow: 1px 1px 10px 1px; ">
                     <%
@@ -38,6 +56,7 @@
                             <th style="width: 134px;">Tran. ID</th>
                             <th style="width: 134px;">Prop. ID</th>
                             <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 134px;">Buyer ID</th>
                             <th style="width: 400px; overflow:hidden">Address</th>
                             <th style="width: 134px;">BHK</th>
                             <th style="width: 154px;">Selling Price</th>
@@ -54,7 +73,8 @@
                         <tr>
                             <td><%=data.TS_ID %></td>
                             <td><%=data.p_id %></td>
-                            <td><%=data.a_id %></td>
+                            <td><a href="/office/profile/a<%=data.a_id%>"><%=data.a_id %></a></td>
+                            <td><a href="/office/profile/bO<%=data.b_id%>"><%=data.b_id %></a></td>
                             <td><%=data.adress %></td>
                             <td><%=data.bhk %></td>
                             <td><%=data.sell_price %></td>
@@ -67,7 +87,7 @@
                     <%  i++;}) %>
                     <% } else{ %>
                     <tr>
-                        <td colspan="7">No Data Found</td>
+                        <td colspan="8">No Data Found</td>
                     </tr>
                     <% } } %>
                    
@@ -77,6 +97,7 @@
                             <th style="width: 134px;">Tran. ID</th>
                             <th style="width: 134px;">Prop. ID</th>
                             <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 134px;">Buyer ID</th>
                             <th style="width: 400px; overflow:hidden">Address</th>
                             <th style="width: 134px;">BHK</th>
                             <th style="width: 154px;">Rent</th>
@@ -93,7 +114,8 @@
                     <tr>
                         <td><%=data.TR_ID %></td>
                         <td><%=data.p_id %></td>
-                        <td><%=data.a_id %></td>
+                        <td><a href="/office/profile/a<%=data.a_id%>"><%=data.a_id %></a></td>
+                        <td><a href="/office/profile/bO<%=data.b_id%>"><%=data.b_id %></a></td>
                         <td><%=data.adress %></td>
                         <td><%=data.bhk %></td>
                         <td><%=data.rent %></td>
@@ -106,7 +128,7 @@
                     <%  i++;}) %>
                     <% } else{ %>
                     <tr>
-                        <td colspan="8">No Data Found</td>
+                        <td colspan="9">No Data Found</td>
                     </tr>
                     <% } } %>
 

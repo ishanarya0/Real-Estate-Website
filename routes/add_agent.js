@@ -92,7 +92,7 @@ router.post('/agent',function(req,res){
     console.log(req.body.email);
     var user =  req.session.user;
     if(user == null){
-      res.redirect("/loginOffice");
+      res.redirect("/login");
       return;
    }
     var s = "select * from buyer where Email="+"'"+req.body.email+"'";
@@ -116,11 +116,38 @@ router.post('/agent',function(req,res){
    
  });
 
+ router.post('/buyerUpdate',function(req,res){
+  console.log(req.body.email);
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+  var s = "select * from buyer where Email="+"'"+req.body.email+"'";
+  var s = "update buyer set Firstname='"+req.body.first_name+"', Lastname='"+req.body.last_name+"', Email ='"+req.body.email+"', contact='"+req.body.Contact+"' where ID="+req.body.ownerID;
+  console.log(s);
+
+
+  con.query(s,(err, agnt) => {
+    
+     if(err)
+     { res.render('add_agent',{user:user,error : "Data matched! Try Again",tit : "buyer"});
+       }
+     else
+     {
+         res.render('add_agent',{user:user,error : "Buyer Succesfully updated!",tit : "buyer"});
+     }
+  
+    });
+ 
+});
+
+
  router.post('/seller',function(req,res){
     console.log(req.body.email);
     var user =  req.session.user;
     if(user == null){
-      res.redirect("/loginOffice");
+      res.redirect("/login");
       return;
    }
     var s = "select * from owner where Email="+"'"+req.body.email+"'";
@@ -143,6 +170,33 @@ router.post('/agent',function(req,res){
       });
    
  });
+
+ router.post('/sellerUpdate',function(req,res){
+  console.log(req.body.email);
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+  var s = "select * from owner where Email="+"'"+req.body.email+"'";
+
+var s = "update owner set Firstname='"+req.body.first_name+"', Lastname='"+req.body.last_name+"', Email ='"+req.body.email+"', contact='"+req.body.Contact+"' where ID="+req.body.ownerID;
+  console.log(s);
+
+
+  con.query(s,(err, agnt) => {
+    
+     if(err)
+     { res.render('add_agent',{user:user,error : "Data matched! Try Again",tit : "seller"});
+       }
+     else
+     {
+         res.render('add_agent',{user:user,error : "Seller Succesfully updated!",tit : "seller"});
+     }
+  
+    });
+ 
+});
 
   setInterval(function(){con.query('select 1');},5000);
 module.exports = router;

@@ -38,21 +38,25 @@
             <div class="main"  style="margin : 100px auto 0 auto; width: 40%; height: 400px; text-align: center; border-radius: 10px;     box-shadow: 1px 1px 10px 1px; ">
                <br> <span style=" padding : 10px; margin-top : 30px; font-size: 23px;text-align: center; color: white; background-color: #0275d8; border-radius: 10px;">ADD <%= tit.toUpperCase() %></span>
                 
-                <form style="margin-top : 40px;" action="/office/add/<%= tit %>" method="POST">
+                <form style="margin-top : 40px;" action="/office/add/<%= tit %>Update" method="POST">
                     
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="text" class="add_agent" id="ownerID" name="ownerID" placeholder="owner id" value="<%=ownerData[0].ID %>" style="width: 60%; border-radius: 4px;" required maxlength="10" minlength="10" readonly> 
+                    </div>
+
                     <div class="form-group" style="width:60%; margin: auto;">
-                        <input type="text" class="add_agent" id="first_name" name="first_name" placeholder="First Name"  style="width: 49%; float: left; border-radius: 4px;" required>
+                        <input type="text" class="add_agent" id="first_name" name="first_name" placeholder="First Name" value = "<%=ownerData[0].Firstname %>" style="width: 49%; float: left; border-radius: 4px;" required>
                     
-                        <input type="text" class="add_agent" id="last_name" name="last_name" placeholder="Last Name" style="width: 49%; border-radius: 4px;">
+                        <input type="text" class="add_agent" id="last_name" name="last_name" placeholder="Last Name" value="<%=ownerData[0].Lastname %>" style="width: 49%; border-radius: 4px;">
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
-                        <input type="email" class="add_agent" id="email" name="email" placeholder="Enter email"  style="width: 60%; border-radius: 4px;" required>
+                        <input type="email" class="add_agent" id="email" name="email" placeholder="Enter email" value="<%=ownerData[0].Email %>" style="width: 60%; border-radius: 4px;" required>
                      </div>
                     
 
                     <div class="form-group" style="margin-top: 20px;">
-                        <input type="text" class="add_agent" id="Contact" name="Contact" placeholder="contact"  style="width: 60%; border-radius: 4px;" required maxlength="10" minlength="10"> 
+                        <input type="text" class="add_agent" id="Contact" name="Contact" placeholder="contact" value="<%=ownerData[0].contact %>" style="width: 60%; border-radius: 4px;" required maxlength="10" minlength="10"> 
                     </div>
 
                     <div class="form-group" style="margin: 20px auto 0px auto; width : 60%; height: 50px;" >

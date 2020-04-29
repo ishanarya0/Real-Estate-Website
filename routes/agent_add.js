@@ -50,6 +50,21 @@ router.get("/property",function(req,res){
     
       });
     });
+
+    router.get("/propertyUnlist/:propid",function(req,res){
+      console.log("I AM IN UPDATE");
+      var user =  req.session.user;
+      if(user == null){
+        res.redirect("/login");
+        return;
+     }
+     var propid = req.params.propid;
+        con.query("update property set P_status=2 where ID="+propid,(err, agnt) => {
+          var propid = req.params.propid;
+          res.redirect("/agent/view/property");
+      });
+  });
+
     
 router.get("/buyer",function(req,res){
   var user =  req.session.user;
@@ -60,13 +75,59 @@ router.get("/buyer",function(req,res){
     res.render("ag_add_bs.ejs",{user: user, error : "",tit : "buyer"});
 });
 
+router.get("/buyerUpdate/:bid",function(req,res){
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+
+ var buyerid = req.params.bid;
+ var sql = "select * from buyer where ID="+buyerid;
+ con.query(sql,(err, buyerdata)=>{
+      if(err){
+            var sql = "select b.ID,b.Firstname,b.Lastname from buyer b, tran_sale ts where (ts.a_id = " + user.ID + " and b.ID = ts.b_id) union select b.ID,b.Firstname,b.Lastname from buyer b, tran_sale tr where (tr.a_id =" + user.ID +" and b.ID = tr.b_id)"
+
+            con.query(sql,(err, agnt) => {
+              var user = req.session.user;
+              res.render("ag_view_list.ejs",{user : user, userData : agnt, tit : "Buyer",flag : 1});
+              })
+              }
+      else {
+        res.render("ag_add_bs_update.ejs",{user: user,error : "",tit : "buyer", ownerData : buyerdata});
+      }
+  });
+});
+
 router.get("/seller",function(req,res){  
   var user =  req.session.user;
   if(user == null){
     res.redirect("/login");
     return;
  }
-    res.render("ag_add_bs.ejs",{user: user,error : "",tit : "seller"});
+    res.render("ag_add_bs.ejs",{user: user,error : "",tit : "seller", ownerData:{} });
+});
+
+router.get("/sellerUpdate/:oid",function(req,res){  
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
+ var ownerid = req.params.oid;
+ var sql = "select * from owner where ID="+ownerid;
+ con.query(sql,(err, ownerdata)=>{
+      if(err){
+        con.query("select o.ID,o.Firstname,o.Lastname from owner o,property p where o.ID=p.o_id and p.a_id = "+user.ID,(err, agnt) => {
+          var user = req.session.user;
+          res.render("ag_view_list.ejs",{user : user, userData : agnt, tit : "Seller", flag : 1});
+         });
+      }
+      else{
+  res.render("ag_add_bs_update.ejs",{user: user,error : "",tit : "seller", ownerData : ownerdata});
+      }
+ });
+    
 });
 
 router.get("/payment",function(req,res){
@@ -314,7 +375,29 @@ router.post("/payment",function(req,res){
 
 });
 
+router.post("/updateAgentCredentials",function(req,res){
+  var user =  req.session.user;
+  if(user == null){
+    res.redirect("/login");
+    return;
+ }
 
+ var sql = "UPDATE login set username='"+req.body.newusername+"', password='"+req.body.newpassword+"' where a_id="+user.ID;
+  console.log(sql);
+  con.query(sql,(err, cred) => {
+    if(err){
+      res.render("dashboard.ejs",{user: user, message:{ "text":"Something went wrong!","newuser":"", "newpass":""}});
+  
+   }
+   else{
+    res.render("dashboard.ejs",{user: user, message: { "text":"Credentials updated!","newuser":"Username: "+req.body.newusername, "newpass":"Password: "+req.body.newpassword}});
+  
+   }
+
+});
+  
+ 
+});
 
 
   setInterval(function(){con.query('select 1');},5000);
