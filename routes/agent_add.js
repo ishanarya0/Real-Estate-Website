@@ -41,8 +41,7 @@ router.get("/property",function(req,res){
     con.query("select ID,Firstname,Lastname from owner",(err, agnt) => {
       var propid = req.params.propid;
       con.query("select * from property where ID="+propid,(err,currData) =>{
-        console.log(currData);
-        console.log(typeof currData[0].o_id);
+       
         var user = req.session.user;
         res.render("updateproperty.ejs",{ user: user, error : "",Data : agnt, curr : currData});
       });
