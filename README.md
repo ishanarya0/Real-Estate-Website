@@ -1,13 +1,13 @@
 # TO RUN THE WEB APP:
 
-**A) Goto https://aqueous-waters-81428.herokuapp.com/**
-**B) Select Agent or Admin button to go to their respective login pages**
+**A) Goto https://aqueous-waters-81428.herokuapp.com/**\
+**B) Select Agent or Admin button to go to their respective login pages**\
 **C) In Agent:**
     username: 5
-    password: password
+    password: password\
 **D) In Admin:**
     username: ishanarya0
-    password: ishanarya
+    password: ishanarya\
     
  # TO RUN ON YOUR LOCAL MACHINE:
  
