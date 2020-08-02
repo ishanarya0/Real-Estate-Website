@@ -18,7 +18,7 @@ var bodyParser=require("body-parser");
 var connection = mysql.createConnection({
 
 
-        host: '37.60.254.201',
+        host: '35.213.189.162',
         user: 'staisaho_pink',
         password: 'dbmsproject2020', 
         database: 'staisaho_dbmsproject'
