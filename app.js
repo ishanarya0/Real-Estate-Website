@@ -6,16 +6,15 @@ var express = require('express')
   //, routes = require('./routes')
   , user = require('./routes/user')
   , userOffice = require('./routes/userOffice')
-  , http = require('http')
   , path = require('path');
 
   var router = express.Router();
 //var methodOverride = require('method-override');
 var session = require('express-session');
 var app = express();
-var mysql      = require('mysql');
+var { createConnection }      = require('mysql');
 var bodyParser=require("body-parser");
-var connection = mysql.createConnection({
+var connection = createConnection({
 
 
         host: '35.213.189.162',
