@@ -19,7 +19,7 @@
  **C) Open command prompt and change the directory to the cloned directory and run command -> npm install.** \
  **D) Use command -> node app.js to start the server.** \
  **E) Open your favourite browser and goto http://localhost:8080/.** \
- **F) Repeat steps B,C,D as above.** \
+ **F) Repeat steps B,C,D as above from the previous section.** \
  
 
 
