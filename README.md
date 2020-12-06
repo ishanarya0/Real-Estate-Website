@@ -6,7 +6,7 @@
 **B) Select Agent or Admin button to go to their respective login pages**\
 **C) In Agent:**
     username: "5"
-    password: "password"\
+    password: "password1"\
 **D) In Admin:**
     username: "ishanarya0"
     password: "ishanarya"
