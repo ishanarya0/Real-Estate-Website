@@ -5,8 +5,8 @@
 **A) Goto https://aqueous-waters-81428.herokuapp.com/** \
 **B) Select Agent or Admin button to go to their respective login pages**\
 **C) In Agent:**
-    username: "5"
-    password: "password1"\
+    username: "6"
+    password: "password"\
 **D) In Admin:**
     username: "ishanarya0"
     password: "ishanarya"
